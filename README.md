@@ -13,12 +13,12 @@ This package implements a web scraper in Python that can parse and format mutual
 Running the scraper requires Python 3, pip, and optionally (but recommended) virtualenv.
 ```bash
 $ virtualenv -p `which python3` holdings && source holdings/bin/activate
-$ pip install -r requirements.txt
-$ python -m holdings.main ticker_or_cik
+$ pip install git+https://github.com/cpackard/fun#egg=holdings 
+$ holdings ticker_or_cik
 ```
 As an example, lookup the holdings for the Vanguard Institutional Index Funds:
 ```bash
-$ python -m holdings.main viiix
+$ holdings viiix
 Reports successfully generated and can be found in:
 reports/0000862084_S000002853_2016_11_30.txt
 reports/0000862084_S000002855_2016_11_30.txt
@@ -51,6 +51,11 @@ $ python -m unittest tests.test_functional
 ```
 
 **Coverage:** Currently test coverage for the application is 85%. A detailed report can be found in htmlcov/index.html
+
+To run the coverage tool, please install the extra test requirements: 
+```bash
+pip install -e .[test]
+```
 
 ## Assumptions and Notes
 While the original scope of the project was broad and ambitious, as I learned more about the data the parser was working with I had to make some pragmatic tradeoffs on application complexity vs supported features. Below is a deatiled progression of the exploration process, but as a brief summary:
@@ -123,4 +128,4 @@ As I progressed through the parsing of N-Q documents in text form, I quickly ran
 Since the application complexity would increase exponentially if these issues were addressed, I decided to not support them at this time. Instead, I focused on an intial data model for N-Q reports that would be consistent across them all, and could address these issues in future iterations if time allows.
 
 ## Final Thoughts
-This project was a great exploration both in financial domain knowledge as well as the techical side of web scraping. It does an excellent job of demonstrating that complexity in a web scraper can quickly climb, and that the developer needs to build their applications with robustness from the start to handle these challenges as they arise.
+This project was a great exploration both in financial domain knowledge as well as the technical side of web scraping. It does an excellent job of demonstrating that complexity in a web scraper can quickly climb, and that the developer needs to build their applications with robustness from the start to handle these challenges as they arise.

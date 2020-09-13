@@ -18,6 +18,14 @@ setup(
     install_requires=[
         'requests',
         'bs4',
-    ]
+    ],
+    extras_require={
+        'test': ['coverage==4.3.4'],
+    },
+    entry_points={
+        'console_scripts': [
+            'holdings=holdings:main',
+        ],
+    },
 )
 
