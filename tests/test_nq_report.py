@@ -1,8 +1,12 @@
 import unittest
 import datetime
 import xml
+import os
+import pathlib
 
 from holdings.dto import reportnq
+from tests import ROOT
+
 
 class TestGetSeriesAndContracts(unittest.TestCase):
 
@@ -46,7 +50,7 @@ class TestGetSeriesAndContracts(unittest.TestCase):
 class TestGetSeriesHoldings(unittest.TestCase):
 
     def test_parse_nq_report_html(self):
-        with open('/home/chpack/Documents/python/quovo_challenge/christian_packard/fund_holdings/resources/vanguard_html.html', 'r') as vanguard_html:
+        with open(os.path.join(ROOT, 'resources/vanguard_html.html'), 'r') as vanguard_html:
             html_text = vanguard_html.read()
 
         holdings = reportnq.parse_nq_report_html(html_text)
@@ -58,7 +62,7 @@ class TestGetSeriesHoldings(unittest.TestCase):
         self.assertEqual(holding.value, '3,655,319')
 
     def test_get_nq_report(self):
-        with open('/home/chpack/Documents/python/quovo_challenge/christian_packard/fund_holdings/resources/vanguard_complete_text_submission.txt', 'r') as vanguard_text:
+        with open(os.path.join(ROOT, 'resources/vanguard_complete_text_submission.txt'), 'r') as vanguard_text:
             complete_text = vanguard_text.read()
 
         nq_report = reportnq.get_nq_report(complete_text)

@@ -1,8 +1,11 @@
+import os
 import unittest
 import datetime
 import xml
 
 from holdings.dto import report13fhr
+from tests import ROOT
+
 
 class TestGet13FXML(unittest.TestCase):
 
@@ -14,7 +17,7 @@ class TestGet13FXML(unittest.TestCase):
     def test_parses_valid_infotable_xml(self):
         # TODO Make this accessible without hard-coded path
 
-        with open('/home/chpack/Documents/python/quovo_challenge/christian_packard/fund_holdings/resources/gates_fund_complete_text_submission.txt', 'r') as text_submission:
+        with open(os.path.join(ROOT, 'resources/gates_fund_complete_text_submission.txt'), 'r') as text_submission:
             holdings_statement = text_submission.read()
 
         try:
@@ -63,7 +66,7 @@ class TestGet13FHoldings(unittest.TestCase):
                           report13fhr.get_13f_holdings, cik, accepted_date, submission_type, malformed_xml)
 
     def test_parse_valid_xml_with_namespace(self):
-        holding_xml     = '/home/chpack/Documents/python/quovo_challenge/christian_packard/fund_holdings/resources/13f_hr_with_namespace.xml'
+        holding_xml     = os.path.join(ROOT, 'resources/13f_hr_with_namespace.xml')
         cik             = 'viiix'
         accepted_date   = datetime.datetime.now()
         submission_type = '13F-HR'
@@ -83,7 +86,7 @@ class TestGet13FHoldings(unittest.TestCase):
         self.assertEqual(holding2.value, '548511')
 
     def test_parse_valid_xml_without_namespace(self):
-        holding_xml     = '/home/chpack/Documents/python/quovo_challenge/christian_packard/fund_holdings/resources/13f_hr_no_namespace.xml'
+        holding_xml     = os.path.join(ROOT, 'resources/13f_hr_no_namespace.xml')
         cik             = 'viiix'
         accepted_date   = datetime.datetime.now()
         submission_type = '13F-HR'
